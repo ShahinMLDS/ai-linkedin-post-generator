@@ -1,11 +1,8 @@
+from utils.model import generate_text
+
+
 def classify_topic(topic):
-    prompt = f"""
-Classify this topic as Tech or General.
-
-Topic: {topic}
-
-Answer:
-"""
+    prompt = f"Classify the topic '{topic}' as Tech or General. Answer only with 'Tech' or 'General'."
     response = generate_text(prompt)
 
     if "Tech" in response:

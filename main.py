@@ -17,14 +17,16 @@ def generate_post(topic, language):
 if __name__ == "__main__":
     print("===== LinkedIn AI Agent =====")
 
-    # Test 1
-    topic1 = "AI in Healthcare"
-    post1 = generate_post(topic1, "English")
-    print("\n--- Output ---")
-    print(post1)
+    while True:
+        topic = input("\nEnter a topic (or type 'exit' to quit): ")
+        
+        if topic.lower() == "exit":
+            print("Goodbye!")
+            break
 
-    # Test 2
-    topic2 = "Work-Life Balance"
-    post2 = generate_post(topic2, "Bengali")
-    print("\n--- Output ---")
-    print(post2)
+        language = input("Enter language (English/Bengali): ")
+
+        post = generate_post(topic, language)
+
+        print("\n--- Generated Post ---")
+        print(post)

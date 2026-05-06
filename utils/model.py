@@ -1,15 +1,20 @@
-from transformers import pipeline
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 
-generator = pipeline("text2text-generation", model="google/flan-t5-base")
+# Use FLAN-T5 (better than GPT-2)
+model_name = "google/flan-t5-base"
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 
 
 def generate_text(prompt):
-    result = generator(
-        prompt,
-        max_new_tokens=200,
+    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
+    outputs = model.generate(
+        **inputs,
+        max_length=150,
         do_sample=True,
         temperature=0.7,
         top_p=0.9,
-        repetition_penalty=1.5
+        num_beams=4,
+        early_stopping=True
     )
-    return result[0]['generated_text']
+    return tokenizer.decode(outputs[0], skip_special_tokens=True)
