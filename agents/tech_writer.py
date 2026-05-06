@@ -1,13 +1,16 @@
-from utils.model import generate_text
-
 def tech_writer(topic, language):
     prompt = f"""
-Write a professional LinkedIn post about "{topic}" in {language}.
+Write a LinkedIn post.
 
-Requirements:
-- 2–4 short paragraphs
+Topic: {topic}
+Language: {language}
+
+Rules:
+- Write ONLY the final post
+- 2 short paragraphs
 - Professional tone
-- Focus on technology insights
+- No repetition
+- No explanation
 - End with a question
 """
     return generate_text(prompt)
